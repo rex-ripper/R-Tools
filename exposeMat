@@ -9,7 +9,7 @@ def exposeMat():
     connections =cmds.listConnections(cmds.listHistory(selected,))
     SG=[]
     for i in connections:
-        if "SG" in i:
+        if cmds.nodeType(i) =="shadingEngine":
             x = i
             SG.append(i)
             matID = cmds.listConnections(x+".surfaceShader")
@@ -19,7 +19,6 @@ def exposeMat():
         x = "it has lambert1 assigned"
     else:    
         x = matID
-
     return x
-    
+
 exposeMat()

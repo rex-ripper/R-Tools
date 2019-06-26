@@ -1,0 +1,25 @@
+"""
+this program Reveals the matreail of a selected object
+
+"""
+
+import maya.cmds as cmds
+def exposeMat():
+    selected = cmds.ls(selection = True)
+    connections =cmds.listConnections(cmds.listHistory(selected,))
+    SG=[]
+    for i in connections:
+        if "SG" in i:
+            x = i
+            SG.append(i)
+            matID = cmds.listConnections(x+".surfaceShader")
+            cmds.select(matID)
+            cmds.HypershadeGraphAddSelected()
+    if len(SG) ==0:
+        x = "it has lambert1 assigned"
+    else:    
+        x = matID
+
+    return x
+    
+exposeMat()
